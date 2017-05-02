@@ -27,8 +27,9 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
@@ -38,6 +39,7 @@ dependencies {
 
     compile 'com.scottyab:rootbeer-lib:0.0.6'
     compile 'com.orhanobut:hawk:2.0.1'
+    compile 'com.google.code.gson:gson:2.8.0' // Forcing latest GSON
     compile 'net.zetetic:android-database-sqlcipher:3.5.7@aar'
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
 
