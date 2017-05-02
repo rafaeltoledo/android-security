@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Security</string>
+
+    <string name="button_safetynet">SafetyNet</string>
 </resources>

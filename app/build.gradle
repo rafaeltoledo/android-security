@@ -12,7 +12,13 @@ android {
         versionName '1.0.0'
 
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+
+        manifestPlaceholders = [
+                SAFETYNET_API_KEY: System.getenv('SAFETYNET_API_KEY')
+        ]
     }
+
+    dataBinding.enabled true
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -29,4 +35,11 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
+
+    compile 'com.scottyab:rootbeer-lib:0.0.6'
+    compile 'com.orhanobut:hawk:2.0.1'
+    compile 'net.zetetic:android-database-sqlcipher:3.5.7@aar'
+    compile 'com.squareup.okhttp3:okhttp:3.7.0'
+
+    compile 'com.google.android.gms:play-services-safetynet:10.2.4'
 }
