@@ -10,11 +10,13 @@ import android.util.Log;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.safetynet.SafetyNet;
-import com.google.android.gms.safetynet.SafetyNetApi;
 import com.scottyab.rootbeer.RootBeer;
 
 import net.rafaeltoledo.security.R;
 import net.rafaeltoledo.security.databinding.ActivityMainBinding;
+import net.rafaeltoledo.security.util.EnvironmentChecker;
+import net.rafaeltoledo.security.util.InstallationChecker;
+import net.rafaeltoledo.security.util.SignatureUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -39,6 +41,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .build();
 
         binding.root.setText(new RootBeer(this).isRooted() ? "Device is rooted" : "Device isn't rooted");
+        binding.installation.setText(InstallationChecker.verifyInstaller(this) ? "Installed from Play Store" : "Installed from unknown source");
+
+        binding.enviroment.setText((EnvironmentChecker.alternativeIsEmulator() ? "Running on an emulator" : "Running on a device")
+                + (EnvironmentChecker.isDebuggable(this) ? " with debugger" : ""));
+
+        binding.tampering.setText((InstallationChecker.checkPackage(this) ?
+                "The package is consistent" : "The package was modified")
+                + (SignatureUtils.checkSignature(this) ? " and the signature is ok" : " and the signature was changed!"));
+
         binding.setController(this);
     }
 

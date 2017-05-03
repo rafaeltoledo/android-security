@@ -11,6 +11,8 @@
 -keep class okhttp3.** { *; }
 -keep interface okhttp3.** { *; }
 -keep class com.google.gson.stream.** { *; }
+-keep class net.sqlcipher.** { *; }
+-keep class net.sqlcipher.database.** { *; }
 
 -assumenosideeffects class android.util.Log {
     public static boolean isLoggable(java.lang.String, int);

@@ -12,9 +12,7 @@ import java.security.MessageDigest;
 public class SignatureUtils {
 
     private static final String TAG = SignatureUtils.class.getSimpleName();
-
-    // Not a good choice to hardcode this
-    private static final String SIGNATURE = "???";
+    private static final String SIGNATURE = "0P333z1O57jHJ87piTMi3W6VuQU=\n";
 
     public static boolean checkSignature(Context context) {
         try {
