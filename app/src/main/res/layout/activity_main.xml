@@ -42,5 +42,12 @@
             android:onClick="@{() -> controller.requestSafetyNetCheck()}"
             android:text="@string/button_safetynet" />
 
+        <Button
+            android:id="@+id/button_okhttp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> controller.performOkHttpRequest()}"
+            android:text="@string/button_okhttp" />
+
     </android.support.v7.widget.LinearLayoutCompat>
 </layout>

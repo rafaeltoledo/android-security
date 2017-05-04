@@ -2,4 +2,5 @@
     <string name="app_name">Security</string>
 
     <string name="button_safetynet">SafetyNet</string>
+    <string name="button_okhttp">Pinned Request</string>
 </resources>

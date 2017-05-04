@@ -1,6 +1,7 @@
 package net.rafaeltoledo.security.ui;
 
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,14 +15,31 @@ import com.scottyab.rootbeer.RootBeer;
 
 import net.rafaeltoledo.security.R;
 import net.rafaeltoledo.security.databinding.ActivityMainBinding;
+import net.rafaeltoledo.security.http.HttpClientProvider;
+import net.rafaeltoledo.security.http.Tls12SslSocketFactory;
 import net.rafaeltoledo.security.util.EnvironmentChecker;
 import net.rafaeltoledo.security.util.InstallationChecker;
 import net.rafaeltoledo.security.util.SignatureUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.security.KeyStore;
 import java.security.SecureRandom;
+import java.util.Collections;
 import java.util.Random;
+
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.ConnectionSpec;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.TlsVersion;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, MainController {
 
@@ -71,6 +89,27 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                                 "" + result.getStatus().getStatusMessage());
                     }
                 });
+    }
+
+    @Override
+    public void performOkHttpRequest() {
+        OkHttpClient client = HttpClientProvider.getClient();
+
+        Request request = new Request.Builder()
+                .url("https://github.com/robots.txt")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e(TAG, "Failed to perform request", e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.d(TAG, response.body().string());
+            }
+        });
     }
 
     private void showSafetyNetResult(String result) {

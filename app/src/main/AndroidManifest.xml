@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="net.rafaeltoledo.security">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".SecurityApp"
         android:allowBackup="false"
