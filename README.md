@@ -2,7 +2,7 @@
 
 A sandbox app with some tools and code to help you to better secure your Android apps.
 
-[Related presentation - pt-BR](https://speakerdeck.com/rafaeltoledo)
+[Related presentation - pt-BR](https://speakerdeck.com/rafaeltoledo/seguranca-no-android-1)
 
 ## This sample includes
 1. Obfuscation using Proguard and `android-proguard-optimize` rules
